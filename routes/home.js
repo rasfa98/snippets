@@ -9,9 +9,22 @@
 'use strict'
 
 const router = require('express').Router()
+const Snippet = require('../models/Snippet')
 
 router.route('/')
-    .get((req, res) => res.render('home'))
+    .get((req, res) => {
+      Snippet.find({})
+    .then(data => {
+      const context = {
+        snippets: data.map(x => {
+          return { title: x.title, body: x.body }
+        })
+      }
+
+      res.render('home', context)
+    })
+    .catch(e => console.log('ERROR:', e))
+    })
 
 // Exports
 module.exports = router

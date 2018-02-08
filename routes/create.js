@@ -9,11 +9,17 @@
  'use strict'
 
  const router = require('express').Router()
+ const Snippet = require('../models/Snippet')
 
  router.route('/create')
      .get((req, res) => res.render('create'))
      .post((req, res) => {
-       console.log(req.body.snippetText)
+       const snippet = new Snippet({
+         title: req.body.snippetTitle,
+         body: req.body.snippetBody
+       })
+
+       snippet.save()
 
        res.redirect('/')
      })
