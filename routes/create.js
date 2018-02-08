@@ -11,7 +11,7 @@
  const router = require('express').Router()
  const Snippet = require('../models/Snippet')
 
- router.route('/create')
+ router.route('/snippet/create')
      .get((req, res) => res.render('create'))
      .post((req, res) => {
        const snippet = new Snippet({

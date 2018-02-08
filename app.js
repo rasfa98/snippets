@@ -24,5 +24,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/', require('./routes/home'))
 app.use('/', require('./routes/create'))
+app.use('/', require('./routes/view'))
 
 app.listen(PORT, console.log(`Server running on PORT: ${PORT}...`))

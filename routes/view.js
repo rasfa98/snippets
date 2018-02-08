@@ -1,7 +1,7 @@
 /**
- * Module for the home routes.
+ * Module for the view routes.
  *
- * @module routes/home.js
+ * @module routes/view.js
  * @author Rasmus Falk
  * @version 1.0.0
  */
@@ -11,17 +11,17 @@
 const router = require('express').Router()
 const Snippet = require('../models/Snippet')
 
-router.route('/')
+router.route('/snippet/view/:id')
     .get((req, res) => {
-      Snippet.find({})
+      const id = req.params.id
+
+      Snippet.findOne({_id: id})
     .then(data => {
       const context = {
-        snippets: data.map(x => {
-          return { id: x.id, title: x.title }
-        })
+        id: data.id, title: data.title, body: data.body
       }
 
-      res.render('home', context)
+      res.render('view', context)
     })
     .catch(e => console.log('ERROR:', e))
     })
