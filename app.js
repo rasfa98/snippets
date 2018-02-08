@@ -19,6 +19,7 @@ app.set('view engine', '.hbs')
 
 app.use(express.static(path.join(__dirname, '/public')))
 
+app.use('/', require('./routes/home'))
 app.use('/', require('./routes/create'))
 
 app.listen(PORT, console.log(`Server running on PORT: ${PORT}...`))
