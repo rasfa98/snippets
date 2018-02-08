@@ -2,6 +2,7 @@ const express = require('express')
 const handlebars = require('express-handlebars')
 const path = require('path')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 
 mongoose.connect('mongodb://db/examination2')
 
@@ -18,6 +19,8 @@ app.engine('.hbs', handlebars({
 app.set('view engine', '.hbs')
 
 app.use(express.static(path.join(__dirname, '/public')))
+
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/', require('./routes/home'))
 app.use('/', require('./routes/create'))

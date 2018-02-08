@@ -12,6 +12,11 @@
 
  router.route('/create')
      .get((req, res) => res.render('create'))
+     .post((req, res) => {
+       console.log(req.body.snippetText)
+
+       res.redirect('/')
+     })
 
  // Exports
  module.exports = router
