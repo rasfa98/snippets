@@ -28,7 +28,7 @@ router.route('/snippet/edit/:id')
     .post((req, res) => {
       const id = req.params.id
 
-      Snippet.findOneAndUpdate({_id: id}, { title: req.body.snippetTitle, body: req.body.snippetBody })
+      Snippet.findOneAndUpdate({_id: id}, { title: req.body.snippetTitle, body: req.body.snippetBody }, { runValidators: true })
       .then(res.redirect('/'))
     })
 

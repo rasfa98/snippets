@@ -18,14 +18,14 @@ app.engine('.hbs', handlebars({
 app.set('view engine', '.hbs')
 
 app.use(session({
-  name: 'snippet-manager',
+  name: 'snippet',
   secret: credentials.secret,
   saveUnitialized: false,
-  resave: false,
+  resave: true,
   cookie: {
-    secure: true,
+    secure: false,
     httpOnly: true,
-    maxAge: 900
+    maxAge: 90000000
   }
 }))
 
@@ -38,6 +38,7 @@ app.use('/', require('./routes/create'))
 app.use('/', require('./routes/view'))
 app.use('/', require('./routes/delete'))
 app.use('/', require('./routes/edit'))
-app.use('/', require('./routes/signout'))
+app.use('/', require('./routes/login'))
+app.use('/', require('./routes/register'))
 
 app.listen(8000, console.log('Server running...'))
