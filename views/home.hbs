@@ -1,10 +1,12 @@
 <h1>Snippets</h1>
 
+<table class="table">
 {{#each snippets }}
-<div>
-    <h2>{{title}}</h2>
-    <a href="/snippet/view/{{id}}">View</a>
-    <a href="/snippet/edit/{{id}}">edit</a>
-    <a href="/snippet/delete/{{id}}">delete</a>
-</div>
+<tr>
+    <td>{{title}}</td>
+    <td><a href="/snippet/view/{{id}}">View</a></td>
+    <td><a href="/snippet/delete/{{id}}">Delete</a></td>
+    <td><a href="/snippet/edit/{{id}}">Edit</a></td>
+</tr>
 {{/each}}
+</table>

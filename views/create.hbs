@@ -1,7 +1,15 @@
-<h1>Create Snippets...</h1>
+<h1>Create a new snippet</h1>
 
 <form action="/snippet/create" method="post">
-    <input type="text" name="snippetTitle">
-    <textarea name="snippetBody"></textarea>
-    <button type="submit">create</button>
+    <div class="form-group">
+        <label>Snippet title</label>
+        <input type="text" name="snippetTitle" class="form-control" placeholder="Enter title">
+    </div>
+
+    <div class="form-group">
+        <label>Snippet text</label>
+        <textarea name="snippetBody" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
 </form>
