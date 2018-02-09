@@ -20,8 +20,7 @@
        })
 
        snippet.save()
-
-       res.redirect('/')
+       .then(res.redirect('/'))
      })
 
  // Exports

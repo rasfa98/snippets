@@ -16,9 +16,7 @@ router.route('/snippet/delete/:id')
       const id = req.params.id
 
       Snippet.findOneAndRemove({_id: id})
-    .then(data => {
-      res.redirect('/')
-    })
+    .then(res.redirect('/'))
     .catch(e => console.log('ERROR:', e))
     })
 

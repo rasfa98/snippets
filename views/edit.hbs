@@ -1,0 +1,7 @@
+<h1>Edit Snippets...</h1>
+
+<form action="/snippet/edit/{{id}}" method="post">
+    <input type="text" name="snippetTitle" value="{{title}}">
+    <textarea name="snippetBody">{{body}}</textarea>
+    <button type="submit">save</button>
+</form>

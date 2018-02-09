@@ -8,8 +8,6 @@ mongoose.connect('mongodb://db/examination2')
 
 const app = express()
 
-const PORT = 8000
-
 // View engine
 app.engine('.hbs', handlebars({
   defaultLayout: 'main',
@@ -25,5 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/', require('./routes/home'))
 app.use('/', require('./routes/create'))
 app.use('/', require('./routes/view'))
+app.use('/', require('./routes/delete'))
+app.use('/', require('./routes/edit'))
 
-app.listen(PORT, console.log(`Server running on PORT: ${PORT}...`))
+app.listen(8000, console.log('Server running...'))
