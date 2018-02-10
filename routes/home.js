@@ -21,8 +21,6 @@ router.route('/')
         })
       }
 
-      console.log(req.session)
-
       res.render('home', context)
     })
     .catch(e => console.log('ERROR:', e))

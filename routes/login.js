@@ -14,14 +14,14 @@ const User = require('../models/User')
 router.route('/login')
     .get((req, res) => res.render('login'))
     .post((req, res) => {
-      User.find({userID: req.body.userID, password: req.body.password})
+      User.findOne({userID: req.body.userID, password: req.body.password})
       .then(user => {
-        if (user.length > 0) {
-          req.session.userId = user._id
+        if (user) {
+          req.session.login = true
           res.redirect('/')
         }
       })
-      .catch(console.log('Wrong'))
+      .catch(e => console.log('ERROR:', e))
     })
 
 // Exports

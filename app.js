@@ -20,8 +20,8 @@ app.set('view engine', '.hbs')
 app.use(session({
   name: 'snippet',
   secret: credentials.secret,
-  saveUnitialized: false,
-  resave: true,
+  saveUnitialized: true,
+  resave: false,
   cookie: {
     secure: false,
     httpOnly: true,
@@ -33,12 +33,29 @@ app.use(express.static(path.join(__dirname, '/public')))
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
+app.use((req, res, next) => {
+  res.locals.login = req.session.login
+  next()
+})
+
 app.use('/', require('./routes/home'))
-app.use('/', require('./routes/create'))
 app.use('/', require('./routes/view'))
+app.use('/', require('./routes/register'))
+app.use('/', require('./routes/login'))
+
+app.use((req, res, next) => {
+  if (req.session.login) {
+    next()
+  } else {
+    res.send(403)
+  }
+})
+
+app.use('/', require('./routes/create'))
 app.use('/', require('./routes/delete'))
 app.use('/', require('./routes/edit'))
-app.use('/', require('./routes/login'))
-app.use('/', require('./routes/register'))
+app.use('/', require('./routes/signout'))
+
+app.use((req, res) => res.status(404).render('404'))
 
 app.listen(8000, console.log('Server running...'))
