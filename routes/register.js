@@ -19,11 +19,19 @@ router.route('/')
         password: req.body.password
       })
 
-      User.find({})
-      .then(data => console.log(data))
-
       user.save()
-      .then(res.redirect('/'))
+      .then(() => {
+        req.session.login = true
+        req.session.userID = user.userID
+        res.locals.login = req.session.login
+
+        req.session.flash = {
+          type: 'info',
+          message: 'Welcome to SnippetS! Here you can view, update and delete your own snippets. If you want to see the snippets created by other users go to the "home" page!'
+        }
+
+        res.redirect('/manage')
+      })
     })
 
 // Exports

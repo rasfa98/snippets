@@ -48,10 +48,10 @@ app.use((req, res, next) => {
 })
 
 app.use('/', require('./routes/home'))
+app.use('/login', require('./routes/login'))
+app.use('/register', require('./routes/register'))
 app.use('/manage', require('./routes/manage'))
 app.use('/snippet', require('./routes/snippetRoutes'))
-app.use('/register', require('./routes/register'))
-app.use('/login', require('./routes/login'))
 app.use('/signout', require('./routes/signout'))
 
 app.use((req, res) => res.status(404).render('404'))
