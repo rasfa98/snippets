@@ -17,7 +17,7 @@ router.route('/')
     .then(data => {
       const context = {
         snippets: data.map(x => {
-          return { id: x.id, title: x.title }
+          return { id: x.id, title: x.title, createdBy: x.createdBy }
         })
       }
 

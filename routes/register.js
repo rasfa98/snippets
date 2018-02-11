@@ -19,6 +19,9 @@ router.route('/register')
         password: req.body.password
       })
 
+      User.find({})
+      .then(data => console.log(data))
+
       user.save()
       .then(res.redirect('/'))
     })

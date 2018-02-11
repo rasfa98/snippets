@@ -18,6 +18,7 @@ router.route('/login')
       .then(user => {
         if (user) {
           req.session.login = true
+          req.session.userID = user.userID
           res.redirect('/')
         }
       })
