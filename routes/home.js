@@ -14,16 +14,16 @@ const Snippet = require('../models/Snippet')
 router.route('/')
     .get((req, res) => {
       Snippet.find({})
-    .then(data => {
-      const context = {
-        snippets: data.map(x => {
-          return { id: x.id, title: x.title }
-        })
-      }
+      .then(data => {
+        const context = {
+          snippets: data.map(x => {
+            return { id: x.id, title: x.title }
+          })
+        }
 
-      res.render('home', context)
-    })
-    .catch(e => console.log('ERROR:', e))
+        res.render('home', context)
+      })
+      .catch(e => console.log('ERROR:', e))
     })
 
 // Exports

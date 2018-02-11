@@ -22,7 +22,14 @@ router.route('/create')
       })
 
       snippet.save()
-      .then(res.redirect('/'))
+      .then(() => {
+        req.session.flash = {
+          type: 'success',
+          message: 'Snippet created successfully!'
+        }
+
+        res.redirect('/manage')
+      })
     })
 
 // Delete
@@ -31,7 +38,14 @@ router.route('/delete/:id')
       const id = req.params.id
 
       Snippet.findOneAndRemove({_id: id})
-      .then(res.redirect('/'))
+      .then(() => {
+        req.session.flash = {
+          type: 'success',
+          message: 'Snippet successfully deleted.'
+        }
+
+        res.redirect('/manage')
+      })
       .catch(e => console.log('ERROR:', e))
     })
 
@@ -54,7 +68,14 @@ router.route('/edit/:id')
       const id = req.params.id
 
       Snippet.findOneAndUpdate({_id: id}, { title: req.body.snippetTitle, body: req.body.snippetBody }, { runValidators: true })
-      .then(res.redirect('/'))
+      .then(snippet => {
+        req.session.flash = {
+          type: 'success',
+          message: 'Edit(s) has been saved.'
+        }
+
+        res.redirect(`/snippet/edit/${snippet._id}`)
+      })
     })
 
 // View
