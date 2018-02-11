@@ -39,19 +39,11 @@ app.use((req, res, next) => {
 })
 
 app.use('/', require('./routes/home'))
+app.use('/manage', require('./routes/manage'))
 app.use('/snippet', require('./routes/snippetRoutes'))
-app.use('/', require('./routes/register'))
-app.use('/', require('./routes/login'))
-
-// app.use((req, res, next) => {
-//   if (req.session.login) {
-//     next()
-//   } else {
-//     res.send(403)
-//   }
-// })
-
-app.use('/', require('./routes/signout'))
+app.use('/register', require('./routes/register'))
+app.use('/login', require('./routes/login'))
+app.use('/signout', require('./routes/signout'))
 
 app.use((req, res) => res.status(404).render('404'))
 

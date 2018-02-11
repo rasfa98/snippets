@@ -10,7 +10,7 @@
 
 const router = require('express').Router()
 
-router.route('/signout')
+router.route('/')
     .get((req, res) => {
       req.session.login = false
       res.redirect('/')

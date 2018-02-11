@@ -1,7 +1,7 @@
 /**
  * Module for the snippet routes.
  *
- * @module routes/create.js
+ * @module routes/snippetRoutes.js
  * @author Rasmus Falk
  * @version 1.0.0
  */

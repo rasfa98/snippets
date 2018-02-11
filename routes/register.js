@@ -11,7 +11,7 @@
 const router = require('express').Router()
 const User = require('../models/User')
 
-router.route('/register')
+router.route('/')
     .get((req, res) => res.render('register'))
     .post((req, res) => {
       const user = new User({

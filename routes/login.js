@@ -11,7 +11,7 @@
 const router = require('express').Router()
 const User = require('../models/User')
 
-router.route('/login')
+router.route('/')
     .get((req, res) => res.render('login'))
     .post((req, res) => {
       User.findOne({userID: req.body.userID, password: req.body.password})
@@ -19,6 +19,7 @@ router.route('/login')
         if (user) {
           req.session.login = true
           req.session.userID = user.userID
+          res.locals.login = req.session.login
           res.redirect('/')
         }
       })
