@@ -13,7 +13,7 @@ const Snippet = require('../models/Snippet')
 
 // Create
 router.route('/create')
-    .get((req, res) => res.render('create'))
+    .get((req, res) => res.render('snippet/create'))
     .post((req, res) => {
       const snippet = new Snippet({
         title: req.body.snippetTitle,
@@ -46,7 +46,7 @@ router.route('/edit/:id')
           id: data.id, title: data.title, body: data.body
         }
 
-        res.render('edit', context)
+        res.render('snippet/edit', context)
       })
       .catch(e => console.log('ERROR:', e))
     })
@@ -68,7 +68,7 @@ router.route('/view/:id')
           id: data.id, title: data.title, body: data.body
         }
 
-        res.render('view', context)
+        res.render('snippet/view', context)
       })
       .catch(e => console.log('ERROR:', e))
     })

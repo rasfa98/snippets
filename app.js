@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const session = require('express-session')
 const credentials = require('./config/credentials')
 
-mongoose.connect('mongodb://db/examination2')
+mongoose.connect('mongodb://db/snippets')
 
 const app = express()
 
@@ -39,21 +39,18 @@ app.use((req, res, next) => {
 })
 
 app.use('/', require('./routes/home'))
-app.use('/', require('./routes/view'))
+app.use('/snippet', require('./routes/snippetRoutes'))
 app.use('/', require('./routes/register'))
 app.use('/', require('./routes/login'))
 
-app.use((req, res, next) => {
-  if (req.session.login) {
-    next()
-  } else {
-    res.send(403)
-  }
-})
+// app.use((req, res, next) => {
+//   if (req.session.login) {
+//     next()
+//   } else {
+//     res.send(403)
+//   }
+// })
 
-app.use('/', require('./routes/create'))
-app.use('/', require('./routes/delete'))
-app.use('/', require('./routes/edit'))
 app.use('/', require('./routes/signout'))
 
 app.use((req, res) => res.status(404).render('404'))
