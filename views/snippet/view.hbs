@@ -1,9 +1,9 @@
 <h1>{{title}}</h1>
+
 <div class="card">
     <div class="card-body">
         <h2 class="view">{{body}}</h2>
         {{#if tags}}
-        <p>Tags</p>
         {{#each tags}}
         <a class="btn btn-outline-primary btn-sm" href="/filter/{{this}}">{{this}}</a>
         {{/each}}

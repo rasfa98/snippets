@@ -9,6 +9,7 @@
 'use strict'
 
 const router = require('express').Router()
+const flashMessage = require('../lib/flashMessage')
 const Snippet = require('../models/Snippet')
 
 // Create
@@ -27,13 +28,11 @@ router.route('/create')
 
       snippet.save()
       .then(() => {
-        req.session.flash = {
-          type: 'success',
-          message: 'Snippet created successfully!'
-        }
+        flashMessage.create(req, 'success', 'Snippet created successfully!')
 
         res.redirect('/manage')
       })
+      .catch(e => console.log('ERROR:', e))
     })
 
 // Delete
@@ -43,10 +42,7 @@ router.route('/delete/:id')
 
       Snippet.findOneAndRemove({_id: id})
       .then(() => {
-        req.session.flash = {
-          type: 'success',
-          message: 'Snippet successfully deleted.'
-        }
+        flashMessage.create(req, 'success', 'Snippet successfully deleted.')
 
         res.redirect('/manage')
       })
@@ -76,13 +72,11 @@ router.route('/edit/:id')
 
       Snippet.findOneAndUpdate({ _id: id }, { title: req.body.snippetTitle, body: req.body.snippetBody, tags: tags }, { runValidators: true })
       .then(snippet => {
-        req.session.flash = {
-          type: 'success',
-          message: 'Edit(s) has been saved.'
-        }
+        flashMessage.create(req, 'success', 'Edit(s) has been saved.')
 
         res.redirect(`/snippet/edit/${snippet._id}`)
       })
+      .catch(e => console.log('ERROR:', e))
     })
 
 // View

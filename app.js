@@ -37,7 +37,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use((req, res, next) => {
   res.locals.flash = req.session.flash
-
   delete req.session.flash
 
   next()
@@ -58,6 +57,6 @@ app.use('/snippet', require('./routes/snippetRoutes'))
 app.use('/signout', require('./routes/signout'))
 
 app.use((req, res) => res.status(404).render('404'))
-app.use((req, res) => res.status(500).render('500'))
+app.use((req, res) => res.status(500).send(500))
 
 app.listen(expressConfig.port, console.log('Server running...'))

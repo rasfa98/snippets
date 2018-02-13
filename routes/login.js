@@ -9,6 +9,7 @@
 'use strict'
 
 const router = require('express').Router()
+const flashMessage = require('../lib/flashMessage')
 const User = require('../models/User')
 
 router.route('/')
@@ -20,12 +21,10 @@ router.route('/')
           req.session.login = true
           req.session.userID = user.userID
           res.locals.login = req.session.login
+
           res.redirect('/manage')
         } else {
-          req.session.flash = {
-            type: 'danger',
-            message: 'The userID or password is incorrect.'
-          }
+          flashMessage.create(req, 'danger', 'The userID or password is incorrect.')
 
           res.redirect('/login')
         }

@@ -9,6 +9,7 @@
 'use strict'
 
 const router = require('express').Router()
+const flashMessage = require('../lib/flashMessage')
 const User = require('../models/User')
 
 router.route('/')
@@ -25,19 +26,14 @@ router.route('/')
         req.session.userID = user.userID
         res.locals.login = req.session.login
 
-        req.session.flash = {
-          type: 'info',
-          message: `Welcome ${user.userID}! Here you can view, update and delete your own snippets. If you want to see the snippets created by other users go to the "home" page!`
-        }
+        flashMessage.create(req, 'info', `Welcome ${user.userID}! Here you can view, update and delete your own snippets.\
+        If you want to see the snippets created by other users go to the "home" page!`)
 
         res.redirect('/manage')
       })
       .catch(e => {
         if (e.name === 'BulkWriteError') {
-          req.session.flash = {
-            type: 'danger',
-            message: 'The userID is not available.'
-          }
+          flashMessage.create(req, 'danger', 'The userID is not available.')
 
           res.redirect('/register')
         }
