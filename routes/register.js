@@ -27,10 +27,20 @@ router.route('/')
 
         req.session.flash = {
           type: 'info',
-          message: 'Welcome to SnippetS! Here you can view, update and delete your own snippets. If you want to see the snippets created by other users go to the "home" page!'
+          message: `Welcome ${user.userID}! Here you can view, update and delete your own snippets. If you want to see the snippets created by other users go to the "home" page!`
         }
 
         res.redirect('/manage')
+      })
+      .catch(e => {
+        if (e.name === 'BulkWriteError') {
+          req.session.flash = {
+            type: 'danger',
+            message: 'The userID is not available.'
+          }
+
+          res.redirect('/register')
+        }
       })
     })
 

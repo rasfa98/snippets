@@ -21,6 +21,13 @@ router.route('/')
           req.session.userID = user.userID
           res.locals.login = req.session.login
           res.redirect('/manage')
+        } else {
+          req.session.flash = {
+            type: 'danger',
+            message: 'The userID or password is incorrect.'
+          }
+
+          res.redirect('/login')
         }
       })
       .catch(e => console.log('ERROR:', e))

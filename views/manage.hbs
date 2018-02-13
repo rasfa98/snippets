@@ -3,12 +3,16 @@
 <h1>Manage your snippets</h1>
 
 <table class="table">
+{{#if snippets}}
 {{#each snippets }}
 <tr>
     <td>{{title}}</td>
-    <td><a href="/snippet/view/{{id}}">View</a></td>
-    <td><a href="/snippet/delete/{{id}}">Delete</a></td>
-    <td><a href="/snippet/edit/{{id}}">Edit</a></td>
+    <td><a class="btn btn-info" href="/snippet/view/{{id}}">View</a></td>
+    <td><a class="btn btn-success"href="/snippet/edit/{{id}}">Edit</a></td>
+    <td><a class="btn btn-danger" href="/snippet/delete/{{id}}">Delete</a></td>
 </tr>
 {{/each}}
 </table>
+{{else}}
+<p>You don't have any created snippets...</p>
+{{/if}}
