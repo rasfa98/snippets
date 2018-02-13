@@ -22,7 +22,7 @@ app.set('view engine', '.hbs')
 app.use(session({
   name: 'snippet',
   secret: credentials.secret,
-  saveUnitialized: true,
+  saveUninitialized: true,
   resave: false,
   cookie: {
     secure: false,
@@ -50,6 +50,7 @@ app.use((req, res, next) => {
 })
 
 app.use('/', require('./routes/home'))
+app.use('/filter', require('./routes/filter'))
 app.use('/login', require('./routes/login'))
 app.use('/register', require('./routes/register'))
 app.use('/manage', require('./routes/manage'))

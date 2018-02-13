@@ -71,7 +71,7 @@ router.route('/edit/:id')
     .post((req, res) => {
       const id = req.params.id
 
-      Snippet.findOneAndUpdate({_id: id}, { title: req.body.snippetTitle, body: req.body.snippetBody, tags: req.body.snippetTags }, { runValidators: true })
+      Snippet.findOneAndUpdate({ _id: id }, { title: req.body.snippetTitle, body: req.body.snippetBody, tags: req.body.snippetTags }, { runValidators: true })
       .then(snippet => {
         req.session.flash = {
           type: 'success',
