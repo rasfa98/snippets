@@ -4,12 +4,15 @@
     <tr>
         <th>Title</th>
         <th>Created by</th>
+        <th>Date</th>
+        <th></th>
         <th></th>
     </tr>
 {{#each snippets }}
 <tr>
     <td>{{title}}</td>
     <td>{{createdBy}}</td>
+    <td>{{date}}</td>
     <td><a class="btn btn-info" href="/snippet/view/{{id}}">View</a></td>
 </tr>
 {{/each}}

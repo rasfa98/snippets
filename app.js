@@ -52,7 +52,6 @@ app.use((req, res, next) => {
 app.use('/', require('./routes/home'))
 app.use('/login', require('./routes/login'))
 app.use('/register', require('./routes/register'))
-
 app.use('/manage', require('./routes/manage'))
 app.use('/snippet', require('./routes/snippetRoutes'))
 app.use('/signout', require('./routes/signout'))

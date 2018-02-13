@@ -57,7 +57,7 @@ router.route('/edit/:id')
       Snippet.findOne({_id: id})
       .then(data => {
         const context = {
-          id: data.id, title: data.title, body: data.body
+          id: data.id, title: data.title, body: data.body, date: Date.now()
         }
 
         res.render('snippet/edit', context)

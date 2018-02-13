@@ -3,10 +3,17 @@
 <h1>Manage your snippets</h1>
 
 <table class="table">
+     <tr>
+        <th>Title</th>
+        <th>Date</th>
+        <th></th>
+        <th></th>
+    </tr>
 {{#if snippets}}
 {{#each snippets }}
 <tr>
     <td>{{title}}</td>
+    <td>{{date}}</td>
     <td><a class="btn btn-info" href="/snippet/view/{{id}}">View</a></td>
     <td><a class="btn btn-success"href="/snippet/edit/{{id}}">Edit</a></td>
     <td><a class="btn btn-danger" href="/snippet/delete/{{id}}">Delete</a></td>
