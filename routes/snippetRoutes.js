@@ -71,7 +71,10 @@ router.route('/edit/:id')
     .post((req, res) => {
       const id = req.params.id
 
-      Snippet.findOneAndUpdate({ _id: id }, { title: req.body.snippetTitle, body: req.body.snippetBody, tags: req.body.snippetTags }, { runValidators: true })
+      const tags = req.body.snippetTags.split(',')
+      .map(x => x.trim())
+
+      Snippet.findOneAndUpdate({ _id: id }, { title: req.body.snippetTitle, body: req.body.snippetBody, tags: tags }, { runValidators: true })
       .then(snippet => {
         req.session.flash = {
           type: 'success',
@@ -92,6 +95,8 @@ router.route('/view/:id')
         const context = {
           id: data.id, title: data.title, body: data.body, tags: data.tags
         }
+
+        if (context.tags[0] === '') { context.tags = undefined }
 
         res.render('snippet/view', context)
       })

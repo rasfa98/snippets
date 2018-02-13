@@ -1,5 +1,6 @@
 <h1>Snippets with the tag: {{tag}}</h1>
 
+{{#if snippets}}
 <table class="table">
     <tr>
         <th>Title</th>
@@ -17,3 +18,6 @@
 </tr>
 {{/each}}
 </table>
+{{else}}
+<p>There are no snippets with this tag...</p>
+{{/if}}

@@ -2,6 +2,7 @@
 
 <h1>Manage your snippets</h1>
 
+{{#if snippets}}
 <table class="table">
      <tr>
         <th>Title</th>
@@ -9,7 +10,6 @@
         <th></th>
         <th></th>
     </tr>
-{{#if snippets}}
 {{#each snippets }}
 <tr>
     <td>{{title}}</td>
