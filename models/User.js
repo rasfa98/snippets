@@ -13,7 +13,7 @@ const mongoose = require('mongoose')
 const userSchema = mongoose.Schema({
   userID: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  date: { type: Date, default: Date.now() }
+  date: { type: Date, default: Date.now(), required: true }
 })
 
 const User = mongoose.model('User', userSchema)

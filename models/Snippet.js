@@ -14,7 +14,8 @@ const snippetSchema = mongoose.Schema({
   title: { type: String, required: true },
   body: { type: String, required: true },
   createdBy: { type: String, required: true },
-  date: { type: Date, default: Date.now() }
+  date: { type: Date, default: Date.now(), required: true },
+  tags: [String]
 })
 
 const Snippet = mongoose.model('Snippet', snippetSchema)

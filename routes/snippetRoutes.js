@@ -15,10 +15,14 @@ const Snippet = require('../models/Snippet')
 router.route('/create')
     .get((req, res) => res.render('snippet/create'))
     .post((req, res) => {
+      const tags = req.body.snippetTags.split(',')
+      .map(x => x.trim())
+
       const snippet = new Snippet({
         title: req.body.snippetTitle,
         body: req.body.snippetBody,
-        createdBy: req.session.userID
+        createdBy: req.session.userID,
+        tags: tags
       })
 
       snippet.save()
@@ -57,7 +61,7 @@ router.route('/edit/:id')
       Snippet.findOne({_id: id})
       .then(data => {
         const context = {
-          id: data.id, title: data.title, body: data.body, date: Date.now()
+          id: data.id, title: data.title, body: data.body, date: Date.now(), tags: data.tags
         }
 
         res.render('snippet/edit', context)
@@ -67,7 +71,7 @@ router.route('/edit/:id')
     .post((req, res) => {
       const id = req.params.id
 
-      Snippet.findOneAndUpdate({_id: id}, { title: req.body.snippetTitle, body: req.body.snippetBody }, { runValidators: true })
+      Snippet.findOneAndUpdate({_id: id}, { title: req.body.snippetTitle, body: req.body.snippetBody, tags: req.body.snippetTags }, { runValidators: true })
       .then(snippet => {
         req.session.flash = {
           type: 'success',
@@ -86,7 +90,7 @@ router.route('/view/:id')
       Snippet.findOne({_id: id})
       .then(data => {
         const context = {
-          id: data.id, title: data.title, body: data.body
+          id: data.id, title: data.title, body: data.body, tags: data.tags
         }
 
         res.render('snippet/view', context)

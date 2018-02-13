@@ -4,13 +4,18 @@
 
 <form action="/snippet/edit/{{id}}" method="post">
     <div class="form-group">
-        <label>Snippet title</label>
+        <label>Title</label>
         <input type="text" name="snippetTitle" class="form-control" placeholder="Enter title" value="{{title}}">
     </div>
 
     <div class="form-group">
         <label>Snippet text</label>
         <textarea name="snippetBody" class="form-control">{{body}}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label>Tags</label>
+        <input type="text" name="snippetTags" class="form-control" placeholder="Enter tags (ex. HTML, Java, C++)" value="{{tags}}">
     </div>
 
     <button type="submit" class="btn btn-success">Save</button>
