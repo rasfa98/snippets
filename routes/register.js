@@ -21,7 +21,7 @@ router.route('/')
       })
 
       user.save()
-      .then(() => {
+      .then((data) => {
         req.session.login = true
         req.session.userID = user.userID
         res.locals.login = req.session.login

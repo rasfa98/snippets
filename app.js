@@ -5,10 +5,8 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const credentials = require('./config/credentials')
-const expressConfig = require('./config/express')
-const mongooseConfig = require('./config/mongoose')
 
-mongoose.connect(mongooseConfig.connectionString)
+mongoose.connect('mongodb://db/snippets')
 
 const app = express()
 
@@ -59,4 +57,4 @@ app.use('/signout', require('./routes/signout'))
 app.use((req, res) => res.status(404).render('404'))
 app.use((req, res) => res.status(500).send(500))
 
-app.listen(expressConfig.port, console.log('Server running...'))
+app.listen(8000, console.log('Server running...'))

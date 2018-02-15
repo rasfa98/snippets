@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/1dv023/rf222fu-examination-2#readme",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "express-handlebars": "^3.0.0",

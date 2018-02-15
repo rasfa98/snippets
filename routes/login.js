@@ -15,21 +15,24 @@ const User = require('../models/User')
 router.route('/')
     .get((req, res) => res.render('login'))
     .post((req, res) => {
-      User.findOne({userID: req.body.userID, password: req.body.password})
+      User.findOne({ userID: req.body.userID })
       .then(user => {
-        if (user) {
-          req.session.login = true
-          req.session.userID = user.userID
-          res.locals.login = req.session.login
+        user.compare(req.body.password)
+        .then(match => {
+          if (match) {
+            req.session.login = true
+            req.session.userID = user.userID
+            res.locals.login = req.session.login
 
-          res.redirect('/manage')
-        } else {
-          flashMessage.create(req, 'danger', 'The userID or password is incorrect.')
-
-          res.redirect('/login')
-        }
+            res.redirect('/manage')
+          }
+        })
       })
-      .catch(e => console.log('ERROR:', e))
+      .catch(() => {
+        flashMessage.create(req, 'danger', 'The userID or password is incorrect.')
+
+        res.redirect('/login')
+      })
     })
 
 // Exports
