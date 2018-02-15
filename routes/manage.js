@@ -10,9 +10,10 @@
 
 const router = require('express').Router()
 const Snippet = require('../models/Snippet')
+const authorized = require('../lib/authorized')
 
 router.route('/')
-    .get((req, res) => {
+    .get(authorized, (req, res) => {
       Snippet.find({createdBy: req.session.userID})
       .then(data => {
         const context = {

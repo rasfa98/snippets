@@ -11,11 +11,12 @@
 const router = require('express').Router()
 const flashMessage = require('../lib/flashMessage')
 const Snippet = require('../models/Snippet')
+const authorized = require('../lib/authorized')
 
 // Create
 router.route('/create')
-    .get((req, res) => res.render('snippet/create'))
-    .post((req, res) => {
+    .get(authorized, (req, res) => res.render('snippet/create'))
+    .post(authorized, (req, res) => {
       const tags = req.body.snippetTags.split(',')
       .map(x => x.trim())
 
@@ -37,7 +38,7 @@ router.route('/create')
 
 // Delete
 router.route('/delete/:id')
-    .get((req, res) => {
+    .get(authorized, (req, res) => {
       const id = req.params.id
 
       Snippet.findOneAndRemove({_id: id})
@@ -51,7 +52,7 @@ router.route('/delete/:id')
 
 // Edit
 router.route('/edit/:id')
-    .get((req, res) => {
+    .get(authorized, (req, res) => {
       const id = req.params.id
 
       Snippet.findOne({_id: id})
@@ -64,7 +65,7 @@ router.route('/edit/:id')
       })
       .catch(e => console.log('ERROR:', e))
     })
-    .post((req, res) => {
+    .post(authorized, (req, res) => {
       const id = req.params.id
 
       const tags = req.body.snippetTags.split(',')
