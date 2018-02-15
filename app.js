@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const credentials = require('./config/credentials')
+const helmet = require('helmet')
 
 mongoose.connect('mongodb://db/snippets')
 
@@ -16,6 +17,8 @@ app.engine('.hbs', handlebars({
 }))
 
 app.set('view engine', '.hbs')
+
+app.use(helmet())
 
 app.use(session({
   name: 'snippet',
