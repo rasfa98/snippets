@@ -39,9 +39,7 @@ router.route('/create')
 // Delete
 router.route('/delete/:id')
     .get(authorized, (req, res) => {
-      const id = req.params.id
-
-      Snippet.findOneAndRemove({_id: id})
+      Snippet.findOneAndRemove({_id: req.params.id, userID: req.params.userID})
       .then(() => {
         flashMessage.create(req, 'success', 'Snippet successfully deleted.')
 
@@ -53,9 +51,7 @@ router.route('/delete/:id')
 // Edit
 router.route('/edit/:id')
     .get(authorized, (req, res) => {
-      const id = req.params.id
-
-      Snippet.findOne({_id: id})
+      Snippet.findOne({_id: req.params.id, userID: req.params.userID})
       .then(data => {
         const context = {
           id: data.id, title: data.title, body: data.body, date: Date.now(), tags: data.tags
@@ -71,7 +67,11 @@ router.route('/edit/:id')
       const tags = req.body.snippetTags.split(',')
       .map(x => x.trim())
 
-      Snippet.findOneAndUpdate({ _id: id }, { title: req.body.snippetTitle, body: req.body.snippetBody, tags: tags }, { runValidators: true })
+      Snippet.findOneAndUpdate({ _id: id }, {
+        title: req.body.snippetTitle,
+        body: req.body.snippetBody,
+        tags: tags },
+        { runValidators: true })
       .then(snippet => {
         flashMessage.create(req, 'success', 'Edit(s) has been saved.')
 

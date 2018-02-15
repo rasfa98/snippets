@@ -3,12 +3,12 @@
 <form action="/snippet/create" method="post">
     <div class="form-group">
         <label>Title</label>
-        <input type="text" name="snippetTitle" class="form-control" placeholder="Enter title">
+        <input required="true" type="text" name="snippetTitle" class="form-control" placeholder="Enter title">
     </div>
 
     <div class="form-group">
         <label>Snippet text</label>
-        <textarea name="snippetBody" class="form-control"></textarea>
+        <textarea required="true" name="snippetBody" class="form-control"></textarea>
     </div>
 
     <div class="form-group">

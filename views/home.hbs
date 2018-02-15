@@ -1,19 +1,13 @@
 <h1>Snippets</h1>
-
-<table class="table">
-    <tr>
-        <th>Title</th>
-        <th>Created by</th>
-        <th>Date</th>
-        <th></th>
-        <th></th>
-    </tr>
+<div class="row">
 {{#each snippets }}
-<tr>
-    <td>{{title}}</td>
-    <td>{{createdBy}}</td>
-    <td>{{date}}</td>
-    <td><a class="btn btn-info" href="/snippet/view/{{id}}">View</a></td>
-</tr>
+<div class="card col-sm-6">
+    <div class="card-body">
+        <h1>{{title}}</h1>
+        <p>By: <a href="/filter/user/{{createdBy}}">{{createdBy}}</a></p>
+        <a class="btn btn-info" href="/snippet/view/{{id}}">View</a>
+    </div>
+</div>
+   
 {{/each}}
-</table>
+</div>

@@ -50,7 +50,7 @@ app.use((req, res, next) => {
 })
 
 app.use('/', require('./routes/home'))
-app.use('/filter', require('./routes/filter'))
+app.use('/filter', require('./routes/filterRoutes'))
 app.use('/login', require('./routes/login'))
 app.use('/register', require('./routes/register'))
 app.use('/manage', require('./routes/manage'))
