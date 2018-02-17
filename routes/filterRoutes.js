@@ -1,7 +1,7 @@
 /**
  * Module for the filter routes.
  *
- * @module routes/filter.js
+ * @module routes/filterRoutes.js
  * @author Rasmus Falk
  * @version 1.0.0
  */

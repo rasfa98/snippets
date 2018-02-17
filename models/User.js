@@ -14,10 +14,10 @@ const bcrypt = bluebird.promisifyAll(require('bcrypt-nodejs'))
 
 const userSchema = mongoose.Schema({
   userID: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  date: { type: Date, default: Date.now(), required: true }
+  password: { type: String, required: true }
 })
 
+// Hashing of password.
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) { next() }
 
@@ -28,11 +28,10 @@ userSchema.pre('save', async function (next) {
   next()
 })
 
+// Compare guessed password to stored password.
 userSchema.methods.compare = function (password) {
   return bcrypt.compareAsync(password, this.password)
 }
 
-const User = mongoose.model('User', userSchema)
-
 // Exports
-module.exports = User
+module.exports = mongoose.model('User', userSchema)

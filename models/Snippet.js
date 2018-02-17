@@ -18,7 +18,5 @@ const snippetSchema = mongoose.Schema({
   tags: [String]
 })
 
-const Snippet = mongoose.model('Snippet', snippetSchema)
-
 // Exports
-module.exports = Snippet
+module.exports = mongoose.model('Snippet', snippetSchema)
