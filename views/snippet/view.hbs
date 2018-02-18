@@ -4,6 +4,7 @@
     <div class="card-body">
         <h2 class="view">{{body}}</h2>
         {{#if tags}}
+        <br>
         {{#each tags}}
         <a class="btn btn-outline-primary btn-sm" href="/filter/tag/{{this}}">{{this}}</a>
         {{/each}}

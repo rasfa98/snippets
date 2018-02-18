@@ -17,71 +17,91 @@ const filter = require('../lib/filter')
 router.route('/create')
     .get(authorized, (req, res) => res.render('snippet/create'))
     .post(authorized, async (req, res) => {
-      const tags = filter.addTags(req)
+      try {
+        const tags = filter.addTags(req)
 
-      const snippet = new Snippet({
-        title: req.body.snippetTitle,
-        body: req.body.snippetBody,
-        createdBy: req.session.userID,
-        tags: tags
-      })
+        const snippet = new Snippet({
+          title: req.body.snippetTitle,
+          body: req.body.snippetBody,
+          createdBy: req.session.userID,
+          tags: tags
+        })
 
-      await snippet.save()
-      req.session.flash = { type: 'success', text: 'Snippet created successfully!' }
+        await snippet.save()
 
-      res.redirect('/manage')
+        req.session.flash = { type: 'success', text: 'Snippet created successfully!' }
+
+        res.redirect('/manage')
+      } catch (err) {
+        console.log(err)
+      }
     })
 
 // Delete
 router.route('/delete/:id')
     .get(authorized, async (req, res) => {
-      await Snippet.findOneAndRemove({_id: req.params.id, userID: req.params.userID})
+      try {
+        await Snippet.findOneAndRemove({ _id: req.params.id, createdBy: req.session.userID })
 
-      req.session.flash = { type: 'success', text: 'Snippet successfully deleted.' }
+        req.session.flash = { type: 'success', text: 'Snippet successfully deleted.' }
 
-      res.redirect('/manage')
+        res.redirect('/manage')
+      } catch (err) {
+        console.log(err)
+      }
     })
 
 // Edit
 router.route('/edit/:id')
     .get(authorized, async (req, res) => {
-      const data = await Snippet.findOne({_id: req.params.id, userID: req.params.userID})
+      try {
+        const snippet = await Snippet.findOne({ _id: req.params.id })
 
-      const context = {
-        id: data.id, title: data.title, body: data.body, date: Date.now(), tags: data.tags
+        const context = {
+          id: snippet.id, title: snippet.title, body: snippet.body, date: Date.now(), tags: snippet.tags
+        }
+
+        res.render('snippet/edit', context)
+      } catch (err) {
+        console.log(err)
       }
-
-      res.render('snippet/edit', context)
     })
     .post(authorized, async (req, res) => {
-      const id = req.params.id
+      try {
+        const tags = filter.addTags(req)
 
-      const tags = filter.addTags(req)
+        const snippet = await Snippet.findOneAndUpdate({ _id: req.params.id, createdBy: req.session.userID }, {
+          title: req.body.snippetTitle,
+          body: req.body.snippetBody,
+          tags: tags },
+          { runValidators: true })
 
-      const snippet = await Snippet.findOneAndUpdate({ _id: id }, {
-        title: req.body.snippetTitle,
-        body: req.body.snippetBody,
-        tags: tags },
-        { runValidators: true })
+        req.session.flash = { type: 'success', text: 'Edit(s) has been saved.' }
 
-      req.session.flash = { type: 'success', text: 'Edit(s) has been saved.' }
-
-      res.redirect(`/snippet/edit/${snippet._id}`)
+        res.redirect(`/snippet/edit/${snippet._id}`)
+      } catch (err) {
+        console.log(err)
+      }
     })
 
 // View
 router.route('/view/:id')
     .get(async (req, res) => {
-      const id = req.params.id
+      try {
+        const id = req.params.id
 
-      const data = await Snippet.findOne({_id: id})
-      const context = {
-        id: data.id, title: data.title, body: data.body, tags: data.tags
+        const snippet = await Snippet.findOne({ _id: id })
+
+        const context = {
+          id: snippet.id, title: snippet.title, body: snippet.body, tags: snippet.tags
+        }
+
+        if (context.tags[0] === '') { context.tags = undefined }
+
+        res.render('snippet/view', context)
+      } catch (err) {
+        console.log(err)
       }
-
-      if (context.tags[0] === '') { context.tags = undefined }
-
-      res.render('snippet/view', context)
     })
 
 // Exports

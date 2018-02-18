@@ -14,15 +14,19 @@ const authorized = require('../lib/authorized')
 
 router.route('/')
     .get(authorized, async (req, res) => {
-      const data = await Snippet.find({createdBy: req.session.userID})
+      try {
+        const snippets = await Snippet.find({ createdBy: req.session.userID })
 
-      const context = {
-        snippets: data.map(x => {
-          return { id: x.id, title: x.title, date: x.date }
-        })
+        const context = {
+          snippets: snippets.map(x => {
+            return { id: x._id, title: x.title, date: x.date }
+          })
+        }
+
+        res.render('manage', context)
+      } catch (err) {
+        console.log(err)
       }
-
-      res.render('manage', context)
     })
 
 // Exports

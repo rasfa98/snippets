@@ -13,15 +13,19 @@ const Snippet = require('../models/Snippet')
 
 router.route('/')
     .get(async (req, res) => {
-      const data = await Snippet.find({})
+      try {
+        const snippets = await Snippet.find({})
 
-      const context = {
-        snippets: data.map(x => {
-          return { id: x.id, title: x.title, createdBy: x.createdBy }
-        })
+        const context = {
+          snippets: snippets.map(x => {
+            return { id: x._id, title: x.title, createdBy: x.createdBy }
+          })
+        }
+
+        res.render('home', context)
+      } catch (err) {
+        console.log(err)
       }
-
-      res.render('home', context)
     })
 
 // Exports

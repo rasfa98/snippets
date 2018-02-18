@@ -27,7 +27,7 @@ app.use(helmet())
 app.use(session({
   name: 'snippet',
   secret: credentials.secret,
-  saveUninitialized: true,
+  saveUninitialized: false,
   resave: false,
   cookie: {
     secure: false,
@@ -62,6 +62,6 @@ app.use('/snippet', require('./routes/snippetRoutes'))
 app.use('/signout', require('./routes/signout'))
 
 app.use((req, res) => res.status(404).render('404'))
-app.use((req, res) => res.status(500).send(500))
+app.use((req, res) => res.status(500).sendStatus(500))
 
 app.listen(port, console.log('Server running...'))

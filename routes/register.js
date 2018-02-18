@@ -21,6 +21,7 @@ router.route('/')
         })
 
         await user.save()
+
         req.session.login = true
         req.session.userID = user.userID
         res.locals.login = req.session.login

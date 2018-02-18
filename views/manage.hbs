@@ -1,4 +1,5 @@
 {{>flash}}
+
 <h1>Manage your snippets</h1>
 
 {{#if snippets}}
@@ -8,17 +9,18 @@
         <th>Date</th>
         <th></th>
         <th></th>
+        <th></th>
     </tr>
 {{#each snippets }}
 <tr>
     <td>{{title}}</td>
     <td>{{date}}</td>
-    <td><a class="btn btn-info" href="/snippet/view/{{id}}">View</a></td>
+    <td><a class="btn btn-primary" href="/snippet/view/{{id}}">View</a></td>
     <td><a class="btn btn-success"href="/snippet/edit/{{id}}">Edit</a></td>
     <td><a class="btn btn-danger" href="/snippet/delete/{{id}}">Delete</a></td>
 </tr>
 {{/each}}
 </table>
 {{else}}
-<p>You don't have any created snippets...</p>
+<p>You haven't created any snippets...</p>
 {{/if}}

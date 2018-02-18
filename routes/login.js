@@ -14,21 +14,21 @@ const User = require('../models/User')
 router.route('/')
     .get((req, res) => res.render('login'))
     .post(async (req, res) => {
-      const user = await User.findOne({ userID: req.body.userID })
+      try {
+        const user = await User.findOne({ userID: req.body.userID })
 
-      if (!user) {
+        const match = await user.compare(req.body.password)
+
+        if (match) {
+          req.session.login = true
+          req.session.userID = user.userID
+          res.locals.login = req.session.login
+
+          res.redirect('/manage')
+        }
+      } catch (err) {
         req.session.flash = { type: 'danger', text: 'The userID or password is incorrect.' }
         res.redirect('/login')
-      }
-
-      const match = await user.compare(req.body.password)
-
-      if (match) {
-        req.session.login = true
-        req.session.userID = user.userID
-        res.locals.login = req.session.login
-
-        res.redirect('/manage')
       }
     })
 

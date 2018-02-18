@@ -1,4 +1,4 @@
-<h1>Filter by {{type}}: {{value}}</h1>
+<h1>Filter Snippets by {{type}}: {{value}}</h1>
 
 {{#if snippets}}
 <div class="row">
@@ -7,10 +7,9 @@
     <div class="card-body">
         <h2>{{title}}</h2>
         <p>By: <a href="/filter/user/{{createdBy}}">{{createdBy}}</a></p>
-        <a class="btn btn-info" href="/snippet/view/{{id}}">View</a>
+        <a class="btn btn-primary" href="/snippet/view/{{id}}">View</a>
     </div>
 </div>
-   
 {{/each}}
 </div>
 {{else}}
