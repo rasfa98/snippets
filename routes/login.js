@@ -16,7 +16,6 @@ router.route('/')
     .post(async (req, res) => {
       try {
         const user = await User.findOne({ userID: req.body.userID })
-
         const match = await user.compare(req.body.password)
 
         if (match) {

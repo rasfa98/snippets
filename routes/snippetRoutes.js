@@ -92,15 +92,11 @@ router.route('/edit/:id')
 router.route('/view/:id')
     .get(async (req, res) => {
       try {
-        const id = req.params.id
-
-        const snippet = await Snippet.findOne({ _id: id })
+        const snippet = await Snippet.findOne({ _id: req.params.id })
 
         const context = {
           id: snippet.id, title: snippet.title, body: snippet.body, tags: snippet.tags
         }
-
-        if (context.tags[0] === '') { context.tags = undefined }
 
         res.render('snippet/view', context)
       } catch (err) {
