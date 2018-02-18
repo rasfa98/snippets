@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 const session = require('express-session')
 const credentials = require('./config/credentials')
 const helmet = require('helmet')
+const csrf = require('csurf')
 
 const app = express()
 const port = 8000
@@ -48,8 +49,12 @@ app.use((req, res, next) => {
   next()
 })
 
+app.use(csrf())
+
 app.use((req, res, next) => {
   res.locals.login = req.session.login
+  res.locals.userID = req.session.userID
+  res.locals.csrfToken = req.csrfToken()
 
   next()
 })
