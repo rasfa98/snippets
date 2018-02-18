@@ -40,6 +40,10 @@ router.route('/create')
 // Delete
 router.route('/delete/:id')
     .get(authorized, async (req, res) => {
+      req.session.flash = { type: 'info', text: `Do you want to delete this snippet?`, modal: true, id: req.params.id }
+      res.redirect('/manage')
+    })
+    .post(authorized, async (req, res) => {
       try {
         await Snippet.findOneAndRemove({ _id: req.params.id, createdBy: req.session.userID })
 

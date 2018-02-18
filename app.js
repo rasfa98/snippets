@@ -42,6 +42,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use((req, res, next) => {
   res.locals.flash = req.session.flash
+
   delete req.session.flash
 
   next()

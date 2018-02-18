@@ -1,3 +1,12 @@
 {{#if flash}}
+{{#if flash.modal}}
+<div class="flash alert alert-{{flash.type}}">{{flash.text}}
+    <form action="/snippet/delete/{{flash.id}}" method="post">
+    <button type="submit" class="btn btn-success btn-sm">Yes</button>
+    <a class="btn btn-danger btn-sm" href="/manage">No</a>
+    </form>
+</div>
+{{else}}
 <div class="flash alert alert-{{flash.type}}">{{flash.text}}</div>
+{{/if}}
 {{/if}}
