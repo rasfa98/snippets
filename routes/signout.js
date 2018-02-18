@@ -12,8 +12,7 @@ const router = require('express').Router()
 
 router.route('/')
     .get((req, res) => {
-      req.session.login = false
-      req.session.userID = null
+      req.session.destroy()
       res.redirect('/')
     })
 

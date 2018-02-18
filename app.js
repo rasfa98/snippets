@@ -1,15 +1,19 @@
 const express = require('express')
 const handlebars = require('express-handlebars')
 const path = require('path')
-const mongoose = require('mongoose')
+const mongoose = require('./config/mongoose')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const credentials = require('./config/credentials')
 const helmet = require('helmet')
 
-mongoose.connect('mongodb://db/snippets')
-
 const app = express()
+const port = 8000
+
+mongoose.run().catch(err => {
+  console.log(err)
+  process.exit(1)
+})
 
 app.engine('.hbs', handlebars({
   defaultLayout: 'main',
@@ -60,4 +64,4 @@ app.use('/signout', require('./routes/signout'))
 app.use((req, res) => res.status(404).render('404'))
 app.use((req, res) => res.status(500).send(500))
 
-app.listen(8000, console.log('Server running...'))
+app.listen(port, console.log('Server running...'))

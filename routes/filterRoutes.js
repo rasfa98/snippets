@@ -12,37 +12,33 @@ const router = require('express').Router()
 const Snippet = require('../models/Snippet')
 
 router.route('/tag/:tag')
-    .get((req, res) => {
-      Snippet.find({ tags: req.params.tag })
-      .then(data => {
-        const context = {
-          value: req.params.tag,
-          type: 'tag',
-          snippets: data.map(x => {
-            return { id: x.id, title: x.title, createdBy: x.createdBy }
-          })
-        }
+    .get(async (req, res) => {
+      const data = await Snippet.find({ tags: req.params.tag })
 
-        res.render('filter', context)
-      })
-      .catch(e => console.log('ERROR:', e))
+      const context = {
+        value: req.params.tag,
+        type: 'tag',
+        snippets: data.map(x => {
+          return { id: x.id, title: x.title, createdBy: x.createdBy }
+        })
+      }
+
+      res.render('filter', context)
     })
 
 router.route('/user/:user')
-    .get((req, res) => {
-      Snippet.find({ createdBy: req.params.user })
-      .then(data => {
-        const context = {
-          value: req.params.user,
-          type: 'user',
-          snippets: data.map(x => {
-            return { id: x.id, title: x.title, createdBy: x.createdBy }
-          })
-        }
+    .get(async (req, res) => {
+      const data = await Snippet.find({ createdBy: req.params.user })
 
-        res.render('filter', context)
-      })
-      .catch(e => console.log('ERROR:', e))
+      const context = {
+        value: req.params.user,
+        type: 'user',
+        snippets: data.map(x => {
+          return { id: x.id, title: x.title, createdBy: x.createdBy }
+        })
+      }
+
+      res.render('filter', context)
     })
 
 // Exports
