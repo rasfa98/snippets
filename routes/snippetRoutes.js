@@ -12,6 +12,7 @@ const router = require('express').Router()
 const Snippet = require('../models/Snippet')
 const authorized = require('../lib/authorized')
 const filter = require('../lib/filter')
+const checkError = require('../lib/checkError')
 
 // Create
 router.route('/create')
@@ -33,7 +34,7 @@ router.route('/create')
 
         res.redirect('/manage')
       } catch (err) {
-        console.log(err)
+        checkError(err, req, res)
       }
     })
 
@@ -51,7 +52,7 @@ router.route('/delete/:id')
 
         res.redirect('/manage')
       } catch (err) {
-        console.log(err)
+        checkError(err, req, res)
       }
     })
 
@@ -67,7 +68,7 @@ router.route('/edit/:id')
 
         res.render('snippet/edit', context)
       } catch (err) {
-        console.log(err)
+        checkError(err, req, res)
       }
     })
     .post(authorized, async (req, res) => {
@@ -84,7 +85,7 @@ router.route('/edit/:id')
 
         res.redirect(`/snippet/edit/${snippet._id}`)
       } catch (err) {
-        console.log(err)
+        checkError(err, req, res)
       }
     })
 
@@ -100,7 +101,7 @@ router.route('/view/:id')
 
         res.render('snippet/view', context)
       } catch (err) {
-        console.log(err)
+        checkError(err, req, res)
       }
     })
 

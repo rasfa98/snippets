@@ -10,6 +10,7 @@
 
 const router = require('express').Router()
 const Snippet = require('../models/Snippet')
+const checkError = require('../lib/checkError')
 
 router.route('/tag/:tag')
     .get(async (req, res) => {
@@ -26,7 +27,7 @@ router.route('/tag/:tag')
 
         res.render('filter', context)
       } catch (err) {
-        console.log(err)
+        checkError(err, req, res)
       }
     })
 
@@ -45,7 +46,7 @@ router.route('/user/:user')
 
         res.render('filter', context)
       } catch (err) {
-        console.log(err)
+        checkError(err, req, res)
       }
     })
 

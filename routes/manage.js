@@ -11,6 +11,7 @@
 const router = require('express').Router()
 const Snippet = require('../models/Snippet')
 const authorized = require('../lib/authorized')
+const checkError = require('../lib/checkError')
 
 router.route('/')
     .get(authorized, async (req, res) => {
@@ -25,7 +26,7 @@ router.route('/')
 
         res.render('manage', context)
       } catch (err) {
-        console.log(err)
+        checkError(err, req, res)
       }
     })
 

@@ -10,6 +10,7 @@
 
 const router = require('express').Router()
 const Snippet = require('../models/Snippet')
+const checkError = require('../lib/checkError')
 
 router.route('/')
     .get(async (req, res) => {
@@ -24,7 +25,7 @@ router.route('/')
 
         res.render('home', context)
       } catch (err) {
-        console.log(err)
+        checkError(err, req, res)
       }
     })
 
