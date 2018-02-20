@@ -16,21 +16,22 @@ router.route('/')
     .get((req, res) => res.render('register'))
     .post(async (req, res) => {
       try {
-        const user = new User({
-          userID: req.body.userID,
-          password: req.body.password
-        })
+        if (req.body.password === req.body.passwordRepeat) {
+          const user = new User({
+            userID: req.body.userID,
+            password: req.body.password
+          })
 
-        await user.save()
+          await user.save()
 
-        req.session.login = true
-        req.session.userID = user.userID
-        res.locals.login = req.session.login
+          req.session.flash = { type: 'success', text: 'Account created successfully!' }
 
-        req.session.flash = { type: 'info', text: `Welcome ${user.userID}! Here you can view, update and delete your own snippets.\
-        If you want to see the snippets created by other users go to the "home" page!` }
+          res.redirect('/login')
+        } else {
+          req.session.flash = { type: 'danger', text: 'The passwords do not match.' }
 
-        res.redirect('/manage')
+          res.redirect('/register')
+        }
       } catch (err) {
         checkError(err, req, res)
       }

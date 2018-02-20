@@ -63,7 +63,7 @@ router.route('/edit/:id')
         const snippet = await Snippet.findOne({ _id: req.params.id })
 
         const context = {
-          id: snippet.id, title: snippet.title, body: snippet.body, date: Date.now(), tags: snippet.tags
+          id: snippet.id, title: snippet.title, body: snippet.body, tags: snippet.tags
         }
 
         res.render('snippet/edit', context)
@@ -78,8 +78,8 @@ router.route('/edit/:id')
         const snippet = await Snippet.findOneAndUpdate({ _id: req.params.id, createdBy: req.session.userID }, {
           title: req.body.snippetTitle,
           body: req.body.snippetBody,
-          tags: tags },
-          { runValidators: true })
+          tags: tags
+        }, { runValidators: true })
 
         req.session.flash = { type: 'success', text: 'Edit(s) has been saved.' }
 
@@ -96,7 +96,7 @@ router.route('/view/:id')
         const snippet = await Snippet.findOne({ _id: req.params.id })
 
         const context = {
-          id: snippet.id, title: snippet.title, body: snippet.body, tags: snippet.tags
+          id: snippet.id, title: snippet.title, body: snippet.body, tags: snippet.tags, createdBy: snippet.createdBy
         }
 
         res.render('snippet/view', context)

@@ -1,13 +1,16 @@
 <h1>{{title}}</h1>
+<p>By: <a href="/filter/user/{{createdBy}}">{{createdBy}}</a></p>
 
 <div class="card">
     <div class="card-body">
         <h2 class="view">{{body}}</h2>
-        {{#if tags}}
-        <br>
-        {{#each tags}}
-        <a class="btn btn-outline-primary btn-sm" href="/filter/tag/{{this}}">{{this}}</a>
-        {{/each}}
-        {{/if}}
     </div>
 </div>
+
+{{#if tags}}
+<br>
+<p>Tags:</p>
+{{#each tags}}
+<a class="btn btn-outline-primary btn-sm" href="/filter/tag/{{this}}">{{this}}</a>
+{{/each}}
+{{/if}}

@@ -20,6 +20,7 @@ router.route('/tag/:tag')
         const context = {
           value: req.params.tag,
           type: 'tag',
+          count: snippets.length,
           snippets: snippets.map(x => {
             return { id: x._id, title: x.title, createdBy: x.createdBy }
           })
@@ -39,6 +40,7 @@ router.route('/user/:user')
         const context = {
           value: req.params.user,
           type: 'user',
+          count: snippets.length,
           snippets: snippets.map(x => {
             return { id: x._id, title: x.title, createdBy: x.createdBy }
           })
