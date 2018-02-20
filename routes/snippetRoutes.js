@@ -30,6 +30,8 @@ router.route('/create')
 
         await snippet.save()
 
+        console.log(tags)
+
         req.session.flash = { type: 'success', text: 'Snippet created successfully!' }
 
         res.redirect('/manage')
@@ -96,7 +98,7 @@ router.route('/view/:id')
         const snippet = await Snippet.findOne({ _id: req.params.id })
 
         const context = {
-          id: snippet.id, title: snippet.title, body: snippet.body, tags: snippet.tags, createdBy: snippet.createdBy
+          id: snippet.id, title: snippet.title, body: snippet.body, tags: snippet.tags.map(x => { return { text: x, url: encodeURI(x) } }), createdBy: snippet.createdBy
         }
 
         res.render('snippet/view', context)

@@ -17,6 +17,9 @@ router.route('/')
       try {
         const snippets = await Snippet.find({})
 
+        // Snippet.remove({}, () => console.log('*'))
+        // require('../models/User').remove({}, () => console.log('*'))
+
         const context = {
           snippets: snippets.map(x => {
             return { id: x._id, title: x.title, createdBy: x.createdBy }

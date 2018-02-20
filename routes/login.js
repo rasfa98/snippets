@@ -25,14 +25,17 @@ router.route('/')
 
         const match = await user.compare(req.body.password)
 
-        if (match) {
-          req.session.login = true
-          req.session.userID = user.userID
-          res.locals.login = req.session.login
-          res.locals.userID = req.session.userID
-
-          res.redirect('/manage')
+        if (!match) {
+          req.session.flash = { type: 'danger', text: 'The userID or password is incorrect.' }
+          res.redirect('/login')
         }
+
+        req.session.login = true
+        req.session.userID = user.userID
+        res.locals.login = req.session.login
+        res.locals.userID = req.session.userID
+
+        res.redirect('/manage')
       } catch (err) {
         checkError(err, req, res)
       }

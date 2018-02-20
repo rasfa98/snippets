@@ -16,22 +16,16 @@ router.route('/')
     .get((req, res) => res.render('register'))
     .post(async (req, res) => {
       try {
-        if (req.body.password === req.body.passwordRepeat) {
-          const user = new User({
-            userID: req.body.userID,
-            password: req.body.password
-          })
+        const user = new User({
+          userID: req.body.userID,
+          password: req.body.password
+        })
 
-          await user.save()
+        await user.save()
 
-          req.session.flash = { type: 'success', text: 'Account created successfully!' }
+        req.session.flash = { type: 'success', text: 'Account created successfully!' }
 
-          res.redirect('/login')
-        } else {
-          req.session.flash = { type: 'danger', text: 'The passwords do not match.' }
-
-          res.redirect('/register')
-        }
+        res.redirect('/login')
       } catch (err) {
         checkError(err, req, res)
       }

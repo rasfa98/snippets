@@ -25,6 +25,7 @@ userSchema.pre('save', async function (next) {
   const hash = await bcrypt.hashAsync(this.password, salt, null)
 
   this.password = hash
+
   next()
 })
 
