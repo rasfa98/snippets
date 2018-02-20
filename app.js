@@ -25,6 +25,12 @@ app.set('view engine', '.hbs')
 
 app.use(helmet())
 
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    defaultSrc: ["'self'"]
+  }
+}))
+
 app.use(session({
   name: 'snippet',
   secret: credentials.secret,
