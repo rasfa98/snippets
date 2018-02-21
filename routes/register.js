@@ -14,7 +14,7 @@ const checkError = require('../lib/checkError')
 const flash = require('../lib/flash')
 
 router.route('/')
-    .get((req, res) => res.render('register'))
+    .get((req, res) => req.session.login ? res.redirect('/manage') : res.render('register'))
     .post(async (req, res) => {
       try {
         const user = new User({

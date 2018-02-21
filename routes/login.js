@@ -14,7 +14,7 @@ const checkError = require('../lib/checkError')
 const flash = require('../lib/flash')
 
 router.route('/')
-    .get((req, res) => { req.session.login ? res.redirect('/manage') : res.render('login') })
+    .get((req, res) => req.session.login ? res.redirect('/manage') : res.render('login'))
     .post(async (req, res) => {
       try {
         const user = await User.findOne({ userID: req.body.userID })
