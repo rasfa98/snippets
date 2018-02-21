@@ -25,9 +25,7 @@ router.route('/')
         }
 
         res.render('manage', context)
-      } catch (err) {
-        checkError(err, req, res)
-      }
+      } catch (err) { checkError(err, req, res) }
     })
 
 // Exports

@@ -27,9 +27,7 @@ router.route('/tag/:tag')
         }
 
         res.render('filter', context)
-      } catch (err) {
-        checkError(err, req, res)
-      }
+      } catch (err) { checkError(err, req, res) }
     })
 
 router.route('/user/:user')
@@ -47,9 +45,7 @@ router.route('/user/:user')
         }
 
         res.render('filter', context)
-      } catch (err) {
-        checkError(err, req, res)
-      }
+      } catch (err) { checkError(err, req, res) }
     })
 
 // Exports

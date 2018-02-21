@@ -27,9 +27,7 @@ router.route('/')
         }
 
         res.render('home', context)
-      } catch (err) {
-        checkError(err, req, res)
-      }
+      } catch (err) { checkError(err, req, res) }
     })
 
 // Exports

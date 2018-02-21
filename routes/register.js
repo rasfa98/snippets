@@ -11,6 +11,7 @@
 const router = require('express').Router()
 const User = require('../models/User')
 const checkError = require('../lib/checkError')
+const flash = require('../lib/flash')
 
 router.route('/')
     .get((req, res) => res.render('register'))
@@ -23,12 +24,8 @@ router.route('/')
 
         await user.save()
 
-        req.session.flash = { type: 'success', text: 'Account created successfully!' }
-
-        res.redirect('/login')
-      } catch (err) {
-        checkError(err, req, res)
-      }
+        flash(req, res, 'success', 'Account created successfully!', '/login')
+      } catch (err) { checkError(err, req, res, '/register') }
     })
 
 // Exports
