@@ -40,7 +40,7 @@ router.route('/user/:user')
           type: 'user',
           count: snippets.length,
           snippets: snippets.map(x => {
-            return { id: x._id, title: x.title, createdBy: x.createdBy }
+            return { id: x._id, title: x.title }
           })
         }
 

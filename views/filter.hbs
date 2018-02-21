@@ -10,7 +10,9 @@
 <div class="card col-sm-6">
     <div class="card-body">
         <h2>{{title}}</h2>
+        {{#if createdBy}}
         <p>By: <a href="/filter/user/{{createdBy}}">{{createdBy}}</a></p>
+        {{/if}}
         <a class="btn btn-primary" href="/snippet/view/{{id}}">View</a>
     </div>
 </div>

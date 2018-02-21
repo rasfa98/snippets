@@ -14,7 +14,7 @@ const bcrypt = bluebird.promisifyAll(require('bcrypt-nodejs'))
 
 const userSchema = mongoose.Schema({
   userID: { type: String, required: '"{PATH}" is required!', trim: true, unique: true },
-  password: { type: String, required: '"{PATH}" is required!' }
+  password: { type: String, required: '"{PATH}" is required!', trim: true }
 })
 
 // Hashing of password.
