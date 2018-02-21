@@ -71,4 +71,8 @@ app.use('/snippet', require('./routes/snippetRoutes'))
 app.use('/signout', require('./routes/signout'))
 
 app.use((req, res) => res.status(404).sendFile(path.join(__dirname, 'views', 'error', '404.html')))
-app.use((req, res) => res.status(500).sendFile(path.join(__dirname, 'views', 'error', '500.html')))
+
+app.use((err, req, res, next) => {
+  console.log(err)
+  return res.status(500).sendFile(path.join(__dirname, 'views', 'error', '500.html'))
+})
