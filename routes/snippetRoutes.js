@@ -37,7 +37,7 @@ router.route('/create')
 router.route('/delete/:id')
     .get(authorized, async (req, res) => {
       req.session.delete = { type: 'danger', text: 'Do you want to delete this snippet?', id: req.params.id }
-      res.redirect('back')
+      res.redirect('/manage')
     })
     .post(authorized, async (req, res) => {
       try {
