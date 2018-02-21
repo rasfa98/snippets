@@ -36,13 +36,14 @@ router.route('/create')
 // Delete
 router.route('/delete/:id')
     .get(authorized, async (req, res) => {
-      flash(req, res, 'info', `Do you want to delete this snippet?`, '/manage', true, req.params.id)
+      req.session.delete = { type: 'danger', text: 'Do you want to delete this snippet?', id: req.params.id }
+      res.redirect('back')
     })
     .post(authorized, async (req, res) => {
       try {
         await Snippet.findOneAndRemove({ _id: req.params.id, createdBy: req.session.userID })
 
-        flash(req, res, 'success', 'Snippet successfully deleted.', '/manage')
+        flash(req, res, 'success', 'Snippet successfully deleted.')
       } catch (err) { checkError(err, req, res) }
     })
 
@@ -51,7 +52,6 @@ router.route('/edit/:id')
     .get(authorized, async (req, res) => {
       try {
         const snippet = await Snippet.findOne({ _id: req.params.id })
-
         const context = { id: snippet.id, title: snippet.title, body: snippet.body, tags: snippet.tags }
 
         res.render('snippet/edit', context)
@@ -75,9 +75,11 @@ router.route('/view/:id')
       try {
         const snippet = await Snippet.findOne({ _id: req.params.id })
 
-        const context = {
-          id: snippet.id, title: snippet.title, body: snippet.body, tags: snippet.tags.map(x => { return { text: x, url: encodeURI(x) } }), createdBy: snippet.createdBy
-        }
+        const context = { id: snippet.id, title: snippet.title, body: snippet.body, createdBy: snippet.createdBy, tags: snippet.tags }
+
+        context.tags = snippet.tags.map(x => {
+          return { text: x, url: encodeURI(x) }
+        })
 
         res.render('snippet/view', context)
       } catch (err) { checkError(err, req, res) }

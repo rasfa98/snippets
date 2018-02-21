@@ -1,5 +1,8 @@
 <h1>{{title}}</h1>
-<p>By: <a href="/filter/user/{{createdBy}}">{{createdBy}}</a></p>
+
+<p>By:
+    <a href="/filter/user/{{createdBy}}">{{createdBy}}</a>
+</p>
 
 <div class="card">
     <div class="card-body">
@@ -12,5 +15,4 @@
 <p>Tags:</p>
 {{#each tags}}
 <a class="btn btn-outline-primary btn-sm" href="/filter/tag/{{this.url}}">{{this.text}}</a>
-{{/each}}
-{{/if}}
+{{/each}} {{/if}}

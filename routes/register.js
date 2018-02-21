@@ -25,7 +25,7 @@ router.route('/')
         await user.save()
 
         flash(req, res, 'success', 'Account created successfully!', '/login')
-      } catch (err) { checkError(err, req, res, '/register') }
+      } catch (err) { checkError(err, req, res) }
     })
 
 // Exports

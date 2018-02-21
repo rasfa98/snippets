@@ -41,7 +41,10 @@ app.use((req, res, next) => {
 
 app.use((req, res, next) => {
   res.locals.flash = req.session.flash
+  res.locals.delete = req.session.delete
+
   delete req.session.flash
+  delete req.session.delete
 
   next()
 })
@@ -49,6 +52,12 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
   res.locals.login = req.session.login
   res.locals.userID = req.session.userID
+
+  next()
+})
+
+app.use((req, res, next) => {
+  res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0')
 
   next()
 })
