@@ -70,5 +70,5 @@ app.use('/manage', require('./routes/manage'))
 app.use('/snippet', require('./routes/snippetRoutes'))
 app.use('/signout', require('./routes/signout'))
 
-app.use((req, res) => res.status(404).sendFile(path.join(__dirname, '/views/error/404.html')))
-app.use((req, res) => res.status(500).sendFile(path.join(__dirname, '/views/error/500.html')))
+app.use((req, res) => res.status(404).sendFile(path.join(__dirname, 'views', 'error', '404.html')))
+app.use((req, res) => res.status(500).sendFile(path.join(__dirname, 'views', 'error', '500.html')))

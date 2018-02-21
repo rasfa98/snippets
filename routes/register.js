@@ -22,7 +22,7 @@ router.route('/')
           password: req.body.password
         })
 
-        if (user.password.length > 4) {
+        if (user.password.length > 3) {
           await user.save()
 
           flash(req, res, 'success', 'Account created successfully!', '/login')

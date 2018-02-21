@@ -18,6 +18,8 @@
  module.exports.run = async () => {
    const connectionString = 'mongodb://db/snippets'
 
+   mongoose.Promise = global.Promise
+
    mongoose.connection.on('connected', () => console.log('Mongoose connection is open.'))
    mongoose.connection.on('error', (err) => console.log(`Mongoose connection error has occured: ${err}.`))
    mongoose.connection.on('disconnected', () => console.log('Mongoose connection is closed.'))
