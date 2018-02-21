@@ -22,9 +22,11 @@ router.route('/')
           password: req.body.password
         })
 
-        await user.save()
+        if (user.password.length > 4) {
+          await user.save()
 
-        flash(req, res, 'success', 'Account created successfully!', '/login')
+          flash(req, res, 'success', 'Account created successfully!', '/login')
+        } else { flash(req, res, 'danger', 'Please use a password with a minimum of 4 characters.') }
       } catch (err) { checkError(err, req, res) }
     })
 

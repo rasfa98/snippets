@@ -29,7 +29,7 @@ router.route('/create')
 
         await snippet.save()
 
-        flash(req, res, 'success', 'Snippet created successfully!', '/manage')
+        flash(req, res, 'success', 'Snippet successfully created!', '/manage')
       } catch (err) { checkError(err, req, res) }
     })
 
@@ -74,7 +74,6 @@ router.route('/view/:id')
     .get(async (req, res) => {
       try {
         const snippet = await Snippet.findOne({ _id: req.params.id })
-
         const context = { id: snippet.id, title: snippet.title, body: snippet.body, createdBy: snippet.createdBy, tags: snippet.tags }
 
         context.tags = snippet.tags.map(x => {
