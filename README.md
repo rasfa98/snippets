@@ -1,4 +1,17 @@
-# I am using Docker for this project
+# Snippets
+
+A CRUD-application that handles code snippets.
+
+![snippets](https://user-images.githubusercontent.com/31412046/50057641-8838d600-016d-11e9-93ec-83370ec127be.png)
+
+## Features
+
+- Login/registration
+- Add snippet with tags
+- Filter snippets by creator or tag
+- Edit/delete snippets
+- View other users snippets
+- Feedback messages
 
 ## Start the application/server using docker
 
