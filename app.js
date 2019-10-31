@@ -1,5 +1,3 @@
-// Main file :) hacktobah robah :)
-
 const mongoose = require('./config/mongoose');
 const express = require('./config/express');
 const session = require('express-session');
