@@ -6,9 +6,9 @@
  * @version 1.0.0
  */
 
- 'use strict'
+'use strict';
 
- // Exports
- module.exports = {
-   secret: 'qwJhs8T28Z3gfVdOp8YcajXuq689cSM4'
- }
+// Exports
+module.exports = {
+  secret: 'qwJhs8T28Z3gfVdOp8YcajXuq689cSM4'
+};
